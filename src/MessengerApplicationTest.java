@@ -1,6 +1,6 @@
 /*
-  Name: Your Name
-  PID:  A12345678
+  Name: Jack Kai lim
+  PID:  A16919063
  */
 
 import java.time.LocalDate;
@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 /**
  * Messenger Application Test
- * @author TODO
- * @since  TODO
+ * @author Jack Kai Lim
+ * @since  04/11/2022
  */
 public class MessengerApplicationTest {
 

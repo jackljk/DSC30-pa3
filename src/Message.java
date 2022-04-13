@@ -11,18 +11,31 @@ public abstract class Message {
     private User sender;
     protected String contents;
 
+    /**
+     * Constructor
+     * @param sender name of the message sender
+     */
     public Message(User sender) {
         this.date = LocalDate.now();
-        /* TODO */
+        /* Constructor setting the sender's name */
+        if (sender == null){
+            throw new IllegalArgumentException();
+        } else {
+            this.sender = sender;
+        }
     }
 
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Getter Method
+     * @return name of sender
+     */
     public User getSender() {
-        /* TODO */
-        return null;
+        /* Returns the name of the sender */
+        return this.sender;
     }
 
     public abstract String getContents();
