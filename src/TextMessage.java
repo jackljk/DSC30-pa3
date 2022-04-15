@@ -31,8 +31,8 @@ public class TextMessage extends Message {
      */
     public String getContents() {
         /* Returns a string with the name, date and text of the text message */
-        return this.getSender().displayName() + " [" + this.getDate().toString() + "]: " +
-                this.contents;
+        return this.getSender().displayName() + " [" + this.getDate().toString() + "]: "
+                + this.contents;
     }
-
 }
+

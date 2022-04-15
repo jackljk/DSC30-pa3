@@ -37,10 +37,10 @@ public class ModeratedRoom implements MessageExchange {
                 /* Returns enitre log if it is less than the numVisibleLog */
                 return this.log;
             } else {
-                ArrayList<Message> temp_log =
+                ArrayList<Message> tempLog =
                         new ArrayList<Message>(this.log.subList(this.log.size()
                                 - this.numVisibleLog, this.log.size()));
-                return temp_log;
+                return tempLog;
             }
         }
     }

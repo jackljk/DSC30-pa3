@@ -96,21 +96,21 @@ public abstract class User {
     public MessageExchange createChatRoom(ArrayList<User> users) {
         /* Creates a new chat room with the User in the ArrayList and returns the chat room
         instance. */
-        ChatRoom new_room = new ChatRoom();
+        ChatRoom newRoom = new ChatRoom();
         if (users == null){
             throw new IllegalArgumentException();
         } else {
             try{
-                new_room.addUser(this); /* Adds the current user himself */
+                newRoom.addUser(this); /* Adds the current user himself */
                 for (User user : users) {
                     /* Iterates through the ArrayList of users and adds each one to the chat room */
-                    new_room.addUser(user);
-                    user.rooms.add(new_room);
+                    newRoom.addUser(user);
+                    user.rooms.add(newRoom);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
-                return new_room;
+                return newRoom;
             }
         }
     }
@@ -123,8 +123,6 @@ public abstract class User {
      */
     public void sendMessage(MessageExchange me, MessageType msgType, String contents) {
         /* Sends a message in a specific group coming from this user */
-        MessageType type_text = MessageType.TEXT;
-        MessageType type_photo = MessageType.PHOTO;
         if (me == null || msgType == null || contents == null) {
             /* Throws exception if the input for any of the inputs are null */
             throw new IllegalArgumentException();
@@ -142,8 +140,8 @@ public abstract class User {
                     me.recordMessage(NewPhotoMessage);
                 } else if (msgType == MessageType.TEXT){
                     /* Creates a new text message and records it in the Message room */
-                    TextMessage NewTextMessage = new TextMessage(this, contents);
-                    me.recordMessage(NewTextMessage);
+                    TextMessage newTextMessage = new TextMessage(this, contents);
+                    me.recordMessage(newTextMessage);
                 } else {
                     throw new IllegalArgumentException();
                 }

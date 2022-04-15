@@ -30,9 +30,9 @@ public class PremiumUser extends User {
         if (me == null  || !this.rooms.contains(me)){
             throw new IllegalArgumentException();
         } else {
-            ArrayList<Message> LogArray = me.getLog(this);
-            /* Loops through the LogArray and adds the log to the final string */
-            for (Message message : LogArray){
+            ArrayList<Message> logArray = me.getLog(this);
+            /* Loops through the logArray and adds the log to the final string */
+            for (Message message : logArray){
                 LogString.append(message.getContents()).append("\n");
             }
         }
@@ -66,22 +66,22 @@ public class PremiumUser extends User {
     public MessageExchange createModeratedRoom(ArrayList<User> users) {
         /* Creates a new moderated room, which can only be done by a premium user and set the
         moderator of the room to be the user him/her self */
-        ModeratedRoom mod_room = new ModeratedRoom(this);
+        ModeratedRoom modRoom = new ModeratedRoom(this);
         if (users == null){
             throw new IllegalArgumentException();
         } else {
             try{
                 /* Adds all the users from the Arraylist of users to the room not including the
                 moderator as the moderator is added during initialization */
-                this.rooms.add(mod_room);
+                this.rooms.add(modRoom);
                 for (User user : users){
-                    mod_room.addUser(user);
-                    user.rooms.add(mod_room);
+                    modRoom.addUser(user);
+                    user.rooms.add(modRoom);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
-                return mod_room;
+                return modRoom;
             }
         }
     }

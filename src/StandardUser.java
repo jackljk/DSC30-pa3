@@ -26,33 +26,32 @@ public class StandardUser extends User {
      */
     public String fetchMessage(MessageExchange me) {
         /* Gets the last 100 messages sent in a chat room */
-        StringBuilder LogString = new StringBuilder();
-        int LogCount = 0;
+        StringBuilder logString = new StringBuilder();
         if (me == null || !this.rooms.contains(me)) {
             throw new IllegalArgumentException();
         } else {
-            ArrayList<Message> LogArray = me.getLog(this);
-            ArrayList<Message> TempArray;
-            if (LogArray.size() > 100) {
-                TempArray = new ArrayList<Message>(LogArray.subList(LogArray.size() - 100,
-                        LogArray.size()));
+            ArrayList<Message> logArray = me.getLog(this);
+            ArrayList<Message> tempArray;
+            if (logArray.size() > 100) {
+                tempArray = new ArrayList<Message>(logArray.subList(logArray.size() - 100,
+                        logArray.size()));
             } else {
-                TempArray = LogArray;
+                tempArray = logArray;
             }
-            for (Message message : TempArray) {
+            for (Message message : tempArray) {
                 /*
                 Loops through the Array of logs and appends the chat into a string if it is a
                 text message, if it is not appends an error message and break the loop if the
                 limit for a standard user is reached.
                  */
                 if (message instanceof TextMessage) {
-                    LogString.append(message.getContents()).append("\n");
+                    logString.append(message.getContents()).append("\n");
                 } else {
-                    LogString.append(FETCH_DENIED_MSG).append("\n");
+                    logString.append(FETCH_DENIED_MSG).append("\n");
                 }
             }
         }
-        return LogString.toString();
+        return logString.toString();
     }
 
     /**
