@@ -27,7 +27,7 @@ public class PremiumUser extends User {
         /* Gets the logged messages from the room specified and returns the entire log as a
         string */
         StringBuilder LogString = new StringBuilder();
-        if (me == null || !this.rooms.contains(me)){
+        if (me == null  || !this.rooms.contains(me)){
             throw new IllegalArgumentException();
         } else {
             ArrayList<Message> LogArray = me.getLog(this);
@@ -45,7 +45,7 @@ public class PremiumUser extends User {
      */
     public String displayName() {
         /* Sets up and returns the special display name for premium users */
-        return "<" + this.customTitle + ">" + this.username;  // placeholder for checkpoint test.
+        return "<" + this.customTitle + "> " + this.username;  // placeholder for checkpoint test.
                                     // replace it with your own after checkpoint submission.
     }
 
@@ -73,8 +73,10 @@ public class PremiumUser extends User {
             try{
                 /* Adds all the users from the Arraylist of users to the room not including the
                 moderator as the moderator is added during initialization */
+                this.rooms.add(mod_room);
                 for (User user : users){
                     mod_room.addUser(user);
+                    user.rooms.add(mod_room);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());

@@ -1,3 +1,5 @@
+import sun.rmi.runtime.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +32,23 @@ public class StandardUser extends User {
             throw new IllegalArgumentException();
         } else {
             ArrayList<Message> LogArray = me.getLog(this);
-            for (Message message : LogArray) {
+            ArrayList<Message> TempArray;
+            if (LogArray.size() > 100) {
+                TempArray = new ArrayList<Message>(LogArray.subList(LogArray.size() - 100,
+                        LogArray.size()));
+            } else {
+                TempArray = LogArray;
+            }
+            for (Message message : TempArray) {
                 /*
                 Loops through the Array of logs and appends the chat into a string if it is a
                 text message, if it is not appends an error message and break the loop if the
                 limit for a standard user is reached.
                  */
-                if (LogCount == 100) {
-                    break;
-                } else if (message instanceof TextMessage) {
+                if (message instanceof TextMessage) {
                     LogString.append(message.getContents()).append("\n");
-                    LogCount += 1;
                 } else {
                     LogString.append(FETCH_DENIED_MSG).append("\n");
-                    LogCount += 1;
                 }
             }
         }

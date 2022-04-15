@@ -37,12 +37,10 @@ public class ModeratedRoom implements MessageExchange {
                 /* Returns enitre log if it is less than the numVisibleLog */
                 return this.log;
             } else {
-                ArrayList<Message> TempLog = new ArrayList<Message>(this.numVisibleLog);
-                /* Returns the last no of messages that are visible to non moderators */
-                for (int i = this.numVisibleLog; i <= 0; i--) {
-                    TempLog.add(this.log.get(this.log.size() - i));
-                }
-                return TempLog;
+                ArrayList<Message> temp_log =
+                        new ArrayList<Message>(this.log.subList(this.log.size()
+                                - this.numVisibleLog, this.log.size()));
+                return temp_log;
             }
         }
     }
@@ -70,8 +68,8 @@ public class ModeratedRoom implements MessageExchange {
      */
     public boolean removeUser(User requester, User u) {
         /* Removes the user that is specified of the requester is the moderator */
-        if (requester == this.moderator || requester == u){
-            if (this.users.contains(u)){
+        if (requester == this.moderator){
+            if (this.users.contains(u) && this.moderator != u){
                 /* Removes user and returns true if user is in the room and the requester is
                 either the moderator or the user him/her self */
                 this.users.remove(u);
@@ -123,6 +121,7 @@ public class ModeratedRoom implements MessageExchange {
                     /* User is not moderator and is in the room, bans and remove from room and
                     returns true */
                     removeUser(this.moderator, u);
+                    u.rooms.remove(this);
                     this.banned.add(u);
                     return true;
                 } else {

@@ -3,5 +3,5 @@
  */
 public enum MessageType {
     TEXT,    // MessageType.TEXT
-    PHOTO,   // MessageType.PHOTO
+    PHOTO   // MessageType.PHOTO
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -30,14 +31,17 @@ public class PhotoMessage extends Message {
         } else {
             /* Check if the extension is valid, if it is save it to extension constructor else
             throws an exception. */
-            String[] get_ext = photoSource.split(".");
-            String[] exts = {"jpg", "jpeg", "gif", "png", "tif", "tiff", "raw"};
-                if (Arrays.asList(exts).contains(get_ext[1])){
+            String[] get_ext = photoSource.split("\\.");
+            ArrayList<String> exts = new ArrayList<String>
+                    (Arrays.asList("jpg", "jpeg", "gif", "png", "tif", "tiff", "raw"));
+            if (get_ext.length > 1){
+                if (exts.contains(get_ext[1].toLowerCase())){
                     this.contents = get_ext[0];
-                    this.extension = get_ext[1].toLowerCase();
-                } else {
-                    throw new OperationDeniedException(INVALID_INPUT);
+                    this.extension = get_ext[1];
                 }
+            } else {
+                throw new OperationDeniedException(INVALID_INPUT);
+            }
         }
     }
 
@@ -47,8 +51,8 @@ public class PhotoMessage extends Message {
      */
     public String getContents() {
         /* Returns the contents of the photo-message */
-        return this.getSender().displayName() + ": Picture at " + this.getContents() +
-                this.getExtension() ;
+        return this.getSender().displayName() + " [" + this.getDate().toString() + "]: Picture at" +
+                " " + this.contents + "." + this.getExtension() ;
     }
 
     /**
