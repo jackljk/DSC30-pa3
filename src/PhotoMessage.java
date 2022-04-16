@@ -35,9 +35,9 @@ public class PhotoMessage extends Message {
             ArrayList<String> exts = new ArrayList<String>
                     (Arrays.asList("jpg", "jpeg", "gif", "png", "tif", "tiff", "raw"));
             if (getExt.length > 1){
-                if (exts.contains(getExt[1].toLowerCase())){
-                    this.contents = getExt[0];
-                    this.extension = getExt[1];
+                if (exts.contains(getExt[getExt.length - 1].toLowerCase())){
+                    this.contents = photoSource;
+                    this.extension = getExt[getExt.length - 1];
                 }
             } else {
                 throw new OperationDeniedException(INVALID_INPUT);
@@ -52,7 +52,7 @@ public class PhotoMessage extends Message {
     public String getContents() {
         /* Returns the contents of the photo-message */
         return this.getSender().displayName() + " [" + this.getDate().toString() + "]: Picture at "
-                + this.contents + "." + this.getExtension();
+                + this.contents;
     }
 
     /**

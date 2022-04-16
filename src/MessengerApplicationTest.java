@@ -480,5 +480,19 @@ public class MessengerApplicationTest {
         ModeratedRoom test = (ModeratedRoom) matt.createModeratedRoom(a);
         matt.setNumVisibleLog(test, 5);
     }
+    @Test
+    public void extras(){
+        ArrayList<User> a = new ArrayList<User>();
+        a.add(matt);
+        ChatRoom test = (ChatRoom) jack.createChatRoom(a);
+        test.addUser(matt);
+        matt.sendMessage(test, MessageType.PHOTO, "A.E.I.O.U.png");
+//        PhotoMessage pm = new PhotoMessage()
+        String test1 = "<Premium> Matty [" + date + "]: Picture at A.E.I.O.U.png\n";
+        String test2 = "png";
+        assertEquals(test1, matt.fetchMessage(test));
+        PhotoMessage pm = (PhotoMessage) test.getLog(matt).get(0);
+        assertEquals(test2, pm.getExtension());
+    }
 }
 

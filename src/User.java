@@ -102,6 +102,7 @@ public abstract class User {
         } else {
             try{
                 newRoom.addUser(this); /* Adds the current user himself */
+                this.rooms.add(newRoom);
                 for (User user : users) {
                     /* Iterates through the ArrayList of users and adds each one to the chat room */
                     newRoom.addUser(user);
