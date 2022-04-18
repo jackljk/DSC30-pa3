@@ -26,14 +26,15 @@ public class StandardUser extends User {
      */
     public String fetchMessage(MessageExchange me) {
         /* Gets the last 100 messages sent in a chat room */
+        int MAX_LOG_SIZE = 100;
         StringBuilder logString = new StringBuilder();
         if (me == null || !this.rooms.contains(me)) {
             throw new IllegalArgumentException();
         } else {
             ArrayList<Message> logArray = me.getLog(this);
             ArrayList<Message> tempArray;
-            if (logArray.size() > 100) {
-                tempArray = new ArrayList<Message>(logArray.subList(logArray.size() - 100,
+            if (logArray.size() > MAX_LOG_SIZE) {
+                tempArray = new ArrayList<Message>(logArray.subList(logArray.size() - MAX_LOG_SIZE,
                         logArray.size()));
             } else {
                 tempArray = logArray;

@@ -124,7 +124,8 @@ public class PremiumUser extends User {
      */
     public boolean setNumVisibleLog(ModeratedRoom room, int newNum) {
         /* Sets the number of visible message log to a new number specified */
-        if (room == null || newNum < 10){
+        int newNUM_MIN_SIZE = 10;
+        if (room == null || newNum < newNUM_MIN_SIZE){
             throw new IllegalArgumentException();
         } else {
             return room.setNumVisibleLog(this, newNum);
